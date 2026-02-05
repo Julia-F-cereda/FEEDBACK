@@ -2,6 +2,11 @@ from flask import Flask, redirect, render_template, request
 #importando 
 app = Flask(__name__)
 
+#senha para a pg
+app.secret_key = "segredo"
+
+lista_coment = []
+
 
 
 @app.route("/")
@@ -22,9 +27,23 @@ def pg_login_post():
     senha = request.form.get("senha")
 
     if usuario == "Julia" and senha == "Juliaabc":
-        return "voce acessou a pagina com sucesso"
+        #redireciona = redirect
+        return redirect("/comentario")
     else:
         return render_template("/login.html", erro = "Acesso Negado!")
+    
+
+    
+@app.route("/comentario" , methods=["GET"])
+def pg_comentario():
+    return render_template("comentarios.html", lista_coment_html = lista_coment)
+
+@app.route("/add_comentario", methods=["POST"])
+def pg_add_comentario():
+    comentario = request.form.get("comentario")
+    lista_coment.append(comentario)
+    print(lista_coment)
+    return redirect("/comentario")
 
 #rodando 
 app.run(debug= True)

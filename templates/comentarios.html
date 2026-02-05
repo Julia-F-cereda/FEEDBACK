@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>comentarios</title>
+    <style>
+        header{
+            background-color: aquamarine;
+        }
+        h1{
+            display: flex;
+            align-items: center;
+    
+        }
+
+        p{
+            font-size: 20px;
+        }
+
+    </style>
 </head>
 <body>
+    <header>
+       <h1>COMENTARIOS</h1> 
+    </header>
+    <form action="/add_comentario" method="post">
+        <p>Escreva seu comentario</p>
+        <input id="comentario" name="comentario" type="text" width="200px">
+
+        <button type="submit">Enviar comentario</button>
+
+        <section class="section">
+            <div class="box">
+                {% for coment in lista_coment_html %}
+                <span>{{coment}}</span>
+            </div>
+            {% endfor %}
+        </section>
+
+    </form>
+
     
 </body>
 </html>
