@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, session
 #importando 
 app = Flask(__name__)
 
@@ -27,6 +27,7 @@ def pg_login_post():
     senha = request.form.get("senha")
 
     if usuario == "Julia" and senha == "Juliaabc":
+        session ["usuario"] = "Julia"
         #redireciona = redirect
         return redirect("/comentario")
     else:
@@ -36,8 +37,11 @@ def pg_login_post():
     
 @app.route("/comentario" , methods=["GET"])
 def pg_comentario():
-    return render_template("comentarios.html", lista_coment_html = lista_coment)
-
+    if "usuario" in session:
+        return render_template("comentarios.html", lista_coment_html = lista_coment)
+    else:
+        return redirect("/login")
+        
 @app.route("/add_comentario", methods=["POST"])
 def pg_add_comentario():
     comentario = request.form.get("comentario")
