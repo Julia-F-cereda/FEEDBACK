@@ -45,5 +45,6 @@ def pg_add_comentario():
     print(lista_coment)
     return redirect("/comentario")
 
+if __name__ == "__main__":
 #rodando 
-app.run(debug= True)
+    app.run(host="0.0.0.0", port=8080, debug= True)
